@@ -33,4 +33,4 @@ API desenvolvida em Python com FastAPI para gerenciamento de autenticação e pe
    ```
 
 5. **Acesse a documentação:**
-   Abra o navegador e acesse `http://127.0.0` para testar as rotas.
+   Abra o navegador e acesse `http://127.0.0` ou `http://localhost:8000/docs` para testar as rotas.
