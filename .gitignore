@@ -1,0 +1,22 @@
+# Ambiente virtual Python
+.venv/
+venv/
+env/
+
+# Arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Bancos de dados locais (SQLite)
+*.db
+*.bd
+*.sqlite
+*.sqlite3
+
+# Variáveis de ambiente (senhas e chaves secretas)
+.env
+
+# Configurações locais de editores
+.vscode/
+.idea/
