@@ -2,6 +2,7 @@ import enum
 from sqlalchemy import create_engine, Column,String,Integer,Boolean,Float,ForeignKey,Enum as SQLEnum
 from sqlalchemy.orm import declarative_base
 
+
 #cria conexão
 db = create_engine("sqlite:///banco.bd")
 
