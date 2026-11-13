@@ -14,12 +14,12 @@ class Usuario(Base):
 
     id = Column("id",Integer,primary_key= True, autoincrement= True)
     nome = Column("nome", String)
-    email = Column("email",String,nullable=False)
+    email = Column("email",String,nullable=False, unique=True)
     senha = Column("senha",String)
     ativo = Column("ativo",Boolean)
     admin = Column("admin",Boolean, default=False)
 
-    def __init__(self,nome,email,senha,ativo,admin):
+    def __init__(self,nome,email,senha,ativo = True,admin = False):
         self.nome = nome
         self.email = email
         self.senha = senha
@@ -37,7 +37,7 @@ class Pedido(Base):
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
     status = Column("status",SQLEnum(StatusPedidos), default=StatusPedidos.PENDENTE) #pedido ,cancelar, finalizado
-    Usuario = Column("usuario",ForeignKey("usuarios.id"))
+    usuario = Column("usuario",ForeignKey("usuarios.id"))
     preco = Column("preco",Float)
 
     #itens = 
@@ -47,6 +47,21 @@ class Pedido(Base):
         self.preco = preco
         self.status = status
 #ItensPedido
+class ItemPedido(Base):
+     __tablename__ = "itens_pedido"
 
+     id = Column("id", Integer, primary_key= True, autoincrement=True)
+     quantidade = Column("quantidade", Integer)
+     sabor = Column("sabor", String)
+     tamanho = Column("tamanho", String)
+     preco_unitario = Column("preco_unitario", Float)
+     pedido = Column("pedido",ForeignKey("pedidos.id"))
+
+     def __init__(self,quantidade,sabor,tamanho,preco_unitario,pedido):
+        self.quantidade = quantidade
+        self.sabor = sabor
+        self.tamanho = tamanho
+        self.preco_unitario = preco_unitario
+        self.pedido = pedido
 #executa a criação dos metados do seu banco 
 
