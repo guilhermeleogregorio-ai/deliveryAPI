@@ -1,4 +1,5 @@
-from sqlalchemy import create_engine, Column,String,Integer,Boolean,Float,ForeignKey
+import enum
+from sqlalchemy import create_engine, Column,String,Integer,Boolean,Float,ForeignKey,Enum as SQLEnum
 from sqlalchemy.orm import declarative_base
 
 #cria conexão
@@ -25,6 +26,26 @@ class Usuario(Base):
         self.ativo = ativo
         self.admin = admin
 #Pedido
+class StatusPedidos(str, enum.Enum):
+        PENDENTE = "PENDENTE"
+        CANCELADO = "CANCELADO"
+        FINALIZADO = "FINALIZADO"
+
+
+class Pedido(Base):
+    __tablename__ = "pedidos"
+
+    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    status = Column("status",SQLEnum(StatusPedidos), default=StatusPedidos.PENDENTE) #pedido ,cancelar, finalizado
+    Usuario = Column("usuario",ForeignKey("usuarios.id"))
+    preco = Column("preco",Float)
+
+    #itens = 
+
+    def __init__(self, usuario, status=StatusPedidos.PENDENTE, preco = 0):
+        self.Usuario = usuario
+        self.preco = preco
+        self.status = status
 #ItensPedido
 
 #executa a criação dos metados do seu banco 
