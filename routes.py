@@ -9,7 +9,7 @@ auth_router = APIRouter(prefix="/auth", tags=["auth"])
 @auth_router.get("/")
 async def autenticar():
     """
-    Essa é a rota padrão de autenticação do sistema
+    Essa é a rota padrão de autentica ção do sistema
     """
     return{"mensagem":"Você acabou de acessar a rota padrão de autenticação", "autenticado": False}
 
@@ -17,7 +17,7 @@ async def autenticar():
 async def criar_conta(email:str,senha:str, nome:str):
     Session = sessionmaker(bind=db)
     session = Session()
-    usuario = session.query(usuario).filter(usuario.email==email).first()
+    usuario = session.query(usuario).filter(Usuario.email==email).first()
     if usuario:
         return {"mensagem" : "Já existe um usuario com esse email"}
     else:
