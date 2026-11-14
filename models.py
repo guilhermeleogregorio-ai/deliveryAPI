@@ -4,7 +4,7 @@ from sqlalchemy.orm import declarative_base
 
 
 #cria conexão
-db = create_engine("sqlite:///banco.bd")
+db = create_engine("sqlite:///banco.db")
 
 #cria a base do banco
 Base = declarative_base()
