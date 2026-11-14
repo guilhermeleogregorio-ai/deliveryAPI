@@ -26,11 +26,16 @@ API desenvolvida em Python com FastAPI para gerenciamento de autenticação e pe
    ```bash
    pip install -r requirements.txt
    ```
+4. **Crie e atualize o banco de dados:**
+   Execute as migrações do Alembic para gerar o arquivo SQLite e criar as tabelas:
+   ```bash
+   alembic upgrade head
+   ```
 
-4. **Inicie o servidor da API:**
+5. **Inicie o servidor da API:**
    ```bash
    uvicorn main:app --reload
    ```
 
-5. **Acesse a documentação:**
-   Abra o navegador e acesse `http://127.0.0` ou `http://localhost:8000/docs` para testar as rotas.
+6. **Acesse a documentação:**
+   Abra o navegador e acesse `http://127.0.0` ou `http://localhost:8000/docs` para testar
