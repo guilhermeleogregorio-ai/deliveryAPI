@@ -17,15 +17,15 @@ async def autenticar():
 
 @auth_router.post("/criar_conta")
 async def criar_conta(Usuario_schema: UsuarioSchema , session : Session = Depends(pegar_sessao)):
-    usuario = session.query(Usuario).filter(Usuario.email==email).first()
+    usuario = session.query(Usuario).filter(Usuario.email==UsuarioSchema.email).first()
     if usuario:
         return HTTPException(status_code=400, detail="Já existe um usuario com esse email")
     else:
-        senha_criptografada = bcrypt_context.hash(senha)
-        novo_usuario = Usuario(nome, email, senha_criptografada)
+        senha_criptografada = bcrypt_context.hash(UsuarioSchema.senha)
+        novo_usuario = Usuario(UsuarioSchema.nome, UsuarioSchema.email, senha_criptografada, UsuarioSchema.admin)
         session.add(novo_usuario)
         session.commit()
-        return{"mensagem" : f"usuario cadastrado com sucesso {email}"}
+        return{"mensagem" : f"usuario cadastrado com sucesso {UsuarioSchema.email}"}
 
 
 #ORDER (Pedidos)
