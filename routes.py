@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from models import Usuario,db
 from dependencies import pegar_sessao
 from main import bcrypt_context
-
+from schemas import UsuarioSchema
 
 # AUTH (Autenticação)
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
@@ -15,7 +15,7 @@ async def autenticar():
     return{"mensagem":"Você acabou de acessar a rota padrão de autenticação", "autenticado": False}
 
 @auth_router.post("/criar_conta")
-async def criar_conta(email:str,senha:str, nome:str, session = Depends(pegar_sessao)):
+async def criar_conta(Usuario_schema: UsuarioSchema , session = Depends(pegar_sessao)):
     usuario = session.query(Usuario).filter(Usuario.email==email).first()
     if usuario:
         return HTTPException(status_code=400, detail="Já existe um usuario com esse email")
