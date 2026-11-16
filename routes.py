@@ -16,7 +16,7 @@ async def autenticar():
 
 @auth_router.post("/criar_conta")
 async def criar_conta(email:str,senha:str, nome:str, session = Depends(pegar_sessao)):
-    usuario = session.query(usuario).filter(Usuario.email==email).first()
+    usuario = session.query(Usuario).filter(Usuario.email==email).first()
     if usuario:
         return {"mensagem" : "Já existe um usuario com esse email"}
     else:
