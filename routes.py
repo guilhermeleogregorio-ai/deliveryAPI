@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from models import Usuario,db
 from dependencies import pegar_sessao
 from main import bcrypt_context
