@@ -18,7 +18,7 @@ async def autenticar():
 async def criar_conta(email:str,senha:str, nome:str, session = Depends(pegar_sessao)):
     usuario = session.query(Usuario).filter(Usuario.email==email).first()
     if usuario:
-        return {"mensagem" : "Já existe um usuario com esse email"}
+        return HTTPException(status_code=400, detail="Já existe um usuario com esse email")
     else:
         senha_criptografada = bcrypt_context.hash(senha)
         novo_usuario = Usuario(nome, email, senha_criptografada)
