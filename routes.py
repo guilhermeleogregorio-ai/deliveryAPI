@@ -24,7 +24,7 @@ async def criar_conta(email:str,senha:str, nome:str, session = Depends(pegar_ses
         novo_usuario = Usuario(nome, email, senha_criptografada)
         session.add(novo_usuario)
         session.commit()
-        return{"mensagem" : "usuario cadastrado com sucesso"}
+        return{"mensagem" : f"usuario cadastrado com sucesso {email}"}
 
 
 #ORDER (Pedidos)
