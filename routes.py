@@ -4,7 +4,8 @@ from dependencies import pegar_sessao
 from main import bcrypt_context
 from schemas import UsuarioSchema
 from sqlalchemy.orm import Session
-
+from schemas import PedidoSchema
+from models import Pedido
 # AUTH (Autenticação)
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -38,3 +39,10 @@ async def pedidos():
     Essa é a rota padrão de pedidos do sistema. Todas as rotas dos pedidos precisam de autenticação
     """
     return {"mensagem": "Você acessou a rota de pedidos"}
+
+@order_router.post("/pedido")
+async def criar_pedido(pedido_schema: PedidoSchema, session: Session = Depends(pegar_sessao)):
+    novo_pedido = Pedido(usuario=PedidoSchema.id_usuario)
+    session.add(novo_pedido)
+    session.commit()
+    return{"mensagem" : f"Pedido criado com sucesso. ID do pedido {novo_pedido.id}"}
