@@ -22,7 +22,7 @@ async def criar_conta(Usuario_schema: UsuarioSchema , session : Session = Depend
     if usuario:
         return HTTPException(status_code=400, detail="Já existe um usuario com esse email")
     else:
-        senha_criptografada = bcrypt_context.hash(UsuarioSchema.senha)
+        senha_criptografada = bcrypt_context.hash(Usuario_schema.senha)
         novo_usuario = Usuario(UsuarioSchema.nome, UsuarioSchema.email, senha_criptografada, UsuarioSchema.admin)
         session.add(novo_usuario)
         session.commit()
