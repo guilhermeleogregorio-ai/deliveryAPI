@@ -14,7 +14,7 @@ class UsuarioSchema(BaseModel):
 
 
 class PedidoSchema(BaseModel):
-    id_usuario : int
+    usuario : int
 
     class config():
             from_attributes = True
