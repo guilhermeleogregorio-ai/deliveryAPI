@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from passlib.context import CryptContext
-
+from dotenv import load_dotenv 
 app = FastAPI()
 
 from routes import auth_router, order_router
